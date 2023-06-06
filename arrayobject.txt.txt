@@ -1,0 +1,58 @@
+i have a use state   const [selectedMembers,setSelectedMembers]=useState([{relation:' ',age:' ',gender:' '}]);
+based on the out put  of two checkboxes having values father and mother then how to update it when ckecked and how to delete when unchecked
+ChatGPT
+
+To update the selectedMembers state when the checkboxes for father and mother are checked or unchecked, you can use the onChange event handler. Here's an example of how you can achieve this:
+
+
+
+
+
+
+import React, { useState } from 'react';
+
+const YourComponent = () => {
+  const [selectedMembers, setSelectedMembers] = useState([
+    { relation: '', age: '', gender: '' },
+  ]);
+
+  const handleCheckboxChange = (event) => {
+    const { value, checked } = event.target;
+
+    if (checked) {
+      // Add the selected member to the state
+      setSelectedMembers((prevMembers) => [
+        ...prevMembers,
+        { relation: value, age: '', gender: '' },
+      ]);
+    } else {
+      // Remove the selected member from the state
+      setSelectedMembers((prevMembers) =>
+        prevMembers.filter((member) => member.relation !== value)
+      );
+    }
+  };
+
+  return (
+    <div>
+      <label>
+        <input
+          type="checkbox"
+          value="father"
+          onChange={handleCheckboxChange}
+        />
+        Father
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          value="mother"
+          onChange={handleCheckboxChange}
+        />
+        Mother
+      </label>
+    </div>
+  );
+};
+
+export default YourComponent;
